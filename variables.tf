@@ -152,6 +152,12 @@ variable "placement_group_id" {
   default     = null
 }
 
+variable "dedicated_host_group_id" {
+  description = "Unique Identifier of the Dedicated Host Group for having an individual host instance for the VSI"
+  type        = string
+  default     = null
+}
+
 variable "security_group" {
   description = "Security group created for VSI"
   type = object({

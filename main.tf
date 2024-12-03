@@ -228,18 +228,19 @@ resource "ibm_is_subnet_reserved_ip" "secondary_vni_ip" {
 }
 
 resource "ibm_is_instance" "vsi" {
-  for_each        = local.vsi_map
-  name            = each.value.vsi_name
-  image           = (local.vsi_boot_volume_snapshot_id == null) ? var.image_id : null # image and snapshot are mutually exclusive
-  profile         = var.machine_type
-  resource_group  = var.resource_group_id
-  vpc             = var.vpc_id
-  zone            = each.value.zone
-  user_data       = var.user_data
-  keys            = var.ssh_key_ids
-  placement_group = var.placement_group_id
-  tags            = var.tags
-  access_tags     = var.access_tags
+  for_each              = local.vsi_map
+  name                  = each.value.vsi_name
+  image                 = (local.vsi_boot_volume_snapshot_id == null) ? var.image_id : null # image and snapshot are mutually exclusive
+  profile               = var.machine_type
+  resource_group        = var.resource_group_id
+  vpc                   = var.vpc_id
+  zone                  = each.value.zone
+  user_data             = var.user_data
+  keys                  = var.ssh_key_ids
+  dedicated_host_group  = var.dedicated_host_group_id
+  placement_group       = var.placement_group_id
+  tags                  = var.tags
+  access_tags           = var.access_tags
   lifecycle {
     ignore_changes = [
       image
